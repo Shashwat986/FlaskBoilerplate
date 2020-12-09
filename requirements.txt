@@ -1,0 +1,6 @@
+flask
+flask-restful
+Flask-SQLAlchemy
+requests
+pytest
+jsonschema
