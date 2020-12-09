@@ -3,10 +3,13 @@ from flask import request
 
 
 def check_user_logged_in(f):
-  @wraps(f)
-  def __decorated(*args, **kwargs):
-      # just do here everything what you need
-      print (request.get_json())
-      result = f(*args, **kwargs)
-      return result
-  return __decorated
+    @wraps(f)
+    def __decorated(*args, **kwargs):
+        r = request.get_json()
+
+        if "hello" not in r or r["hello"] != "world":
+            return {"success": False, "message": "Password Error"}
+
+        return f(*args, **kwargs)
+
+    return __decorated

@@ -4,3 +4,4 @@ Flask-SQLAlchemy
 requests
 pytest
 jsonschema
+flask-redis
