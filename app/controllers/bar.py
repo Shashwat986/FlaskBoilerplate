@@ -1,7 +1,7 @@
 from flask_restful import Resource
 from flask import request
 import jsonschema
-from ..models.user import User
+from app.models.user import User
 from app.helpers import login
 
 BAR_SCHEMA = {

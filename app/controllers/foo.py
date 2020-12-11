@@ -1,6 +1,6 @@
 from flask_restful import Resource
 from honeybadger import honeybadger
-from ..models.user import User
+from app.models.user import User
 
 
 class Foo(Resource):

@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_redis import FlaskRedis
 from honeybadger.contrib import FlaskHoneybadger
 
-from .config import config
+from app.config import config
 
 app = Flask(__name__)
 app.config.update(**config)
