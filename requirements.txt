@@ -7,3 +7,4 @@ jsonschema
 flask-redis
 honeybadger
 blinker
+sqlalchemy_mixins
