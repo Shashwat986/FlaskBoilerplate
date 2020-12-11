@@ -1,8 +1,8 @@
 from flask_restful import Resource
 from flask import request
 from app.models.user import User
-from app.helpers import login
-from app.helpers import validate
+from app.helpers.login import check_user_logged_in
+from app.helpers.validate import validate_schema
 
 BAR_SCHEMA = {
     "type": "object",
@@ -26,8 +26,8 @@ BAR_SCHEMA = {
 
 
 class Bar(Resource):
-    @login.check_user_logged_in
-    @validate.validate_schema(BAR_SCHEMA)
+    @check_user_logged_in
+    @validate_schema(BAR_SCHEMA)
     def post(self):
         json = request.get_json()
 
