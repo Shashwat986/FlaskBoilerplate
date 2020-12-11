@@ -12,7 +12,10 @@ BAR_SCHEMA = {
             "type": "array",
             "items": {
                 "type": "object",
-                "properties": {"color": {"type": "string"}, "size": {"type": "number"}},
+                "properties": {
+                    "color": {"type": "string"},
+                    "size": {"type": "number"}
+                },
                 "required": ["color"],
             },
             "minItems": 1,
@@ -35,6 +38,7 @@ class Bar(Resource):
         }
 
     def post_schema_validation_error(self, error):
+        print(request)
         return {
             "success": False,
             "message": error.message
