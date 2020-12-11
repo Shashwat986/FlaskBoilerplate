@@ -8,3 +8,5 @@ flask-redis
 honeybadger
 blinker
 sqlalchemy_mixins
+Flask-RQ2
+rq-dashboard
