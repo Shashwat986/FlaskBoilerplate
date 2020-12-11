@@ -5,3 +5,5 @@ requests
 pytest
 jsonschema
 flask-redis
+honeybadger
+blinker
