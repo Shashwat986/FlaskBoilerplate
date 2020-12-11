@@ -1,8 +1,8 @@
 from flask_restful import Resource
 from flask import request
-import jsonschema
 from app.models.user import User
 from app.helpers import login
+from app.helpers import validate
 
 BAR_SCHEMA = {
     "type": "object",
@@ -24,16 +24,18 @@ BAR_SCHEMA = {
 
 class Bar(Resource):
     @login.check_user_logged_in
+    @validate.validate_schema(BAR_SCHEMA)
     def post(self):
-        try:
-            jsonschema.validate(instance=request.get_json(), schema=BAR_SCHEMA)
-        except jsonschema.exceptions.ValidationError:
-            return {"success": False}
-
         json = request.get_json()
 
         return {
             "hello": "world",
             "count": len(json["world"]),
             "data": [i["color"] for i in json["world"]],
+        }
+
+    def post_schema_validation_error(self, error):
+        return {
+            "success": False,
+            "message": error.message
         }
