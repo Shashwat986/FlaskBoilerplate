@@ -95,7 +95,7 @@ An example of this API versioning example may be seen in the `app/controllers/fo
 
 There is a very rudimentary example of caching in `app/controllers/baz.py`. The controller just looks at the Redis cache, sees if there's an entry, and if there is, returns it. If there isn't it creates an entry and returns it.
 
-Note: this is a very bad proof of concept, because the code at `app/helpers/redis.py`, which actually does the caching doesn't look at any request parameters or request body before checking and retrieving from the cache. In any real scenario, this will need to be changed.
+Note: this is a very bad proof of concept, because the code at `app/helpers/redis.py`, which actually does the caching doesn't look at any request parameters or request body before checking and retrieving from the cache. It also expires the cache every 60 seconds. In any real scenario, all of this will need to be changed.
 
 #### Cat Facts
 

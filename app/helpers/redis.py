@@ -17,6 +17,7 @@ def redis_cache(redis_key):
             else:
                 response = f(*args, **kwargs)
                 redis_client.set(redis_key, json.dumps(response))
+                redis_client.expire(redis_key, 60)
                 return response
 
         return __decorated
