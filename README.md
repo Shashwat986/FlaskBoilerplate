@@ -59,15 +59,23 @@ There are two separate places where a Honeybadger notification can be seen:
 
 ### JSON Schema Validation
 
-TBC
+One core part of any API platform will be to ensure that request validation happens properly. This is handled using [JSON Schema](https://json-schema.org/).
+
+To take care of validation, a helper function has been created in `app/helpers/validate.py` which takes a schema as input and validates `request.get_json()` against that schema. It also has some code written to call the `<method>_schema_validation_error()` method of the API class whenever a validation failure happens, allowing all the business logic to be at the controller. If `<method>_schema_validation_error()` doesn't exist, it will raise an exception, which will trigger an HTTP 500: Internal Server Error.
+
+An example of using JSON Schema for validation is in the `app/controllers/bar.py` file. Here, if the input validation fails, the helper calls `Bar.post_schema_validation_error`, which then passes on the error in the response.
 
 ### PyTest
 
-TBC
+The test methods in the `test/` directory aren't written in the way they should be. Right now, they assume that the server is up at `localhost:5000` and use `requests` to make API calls to that server with valid and invalid requests. It does the job, but the test module requires the development server to be up and running, and connected to the development database, which isn't ideal from a unit-testing standpoint.
+
+However, it does the job, and adds coverage to the various API endpoints, which is sufficient for now.
 
 ### API Versioning
 
-TBC
+There are multiple ways to perform API versioning. My personal preference is to use the approach suggested in [this Stackoverflow question](https://stackoverflow.com/a/28797512/967478). This approach is pretty self-explanatory. The only concern I have with it is that it invariably leads to code duplication. Duplication doesn't matter too much, because the older versions are expected to be legacy versions, but it can still lead to issues with business logic and maintainence.
+
+In this repository, I have gone for a different way of doing API versioning, where I pass the version code to each route via a route variable, and leave the business logic of API versioning at an individual controller level. This is potentially cleaner from the point of view of code-reuse, and definitely cleaner if each API is separately versioned, but if the entire API platform is versioned every time, this approach may be suboptimal.
 
 ### Other Examples
 
