@@ -15,6 +15,8 @@ This repository contains a set of examples for multiple functions required in a 
   - `models`
     - `__init__.py`: This init file defines `SQLBase`, which is our base class for all SQLAlchemy models.
     - ...: This folder contains all our models.
+  - `services`
+    - ...: This folder will contain all self-contained services. This is generally where we will put any third-party interactions and logic
   - `workers`
     - ...: This folder contains all our workers
 - `pytest.ini`: This is the configuration file used by `pytest`
@@ -89,4 +91,12 @@ An example of this API versioning example may be seen in the `app/controllers/fo
 
 ### Other Examples
 
-TBC
+#### Caching
+
+There is a very rudimentary example of caching in `app/controllers/baz.py`. The controller just looks at the Redis cache, sees if there's an entry, and if there is, returns it. If there isn't it creates an entry and returns it.
+
+Note: this is a very bad proof of concept, because the code at `app/helpers/redis.py`, which actually does the caching doesn't look at any request parameters or request body before checking and retrieving from the cache. In any real scenario, this will need to be changed.
+
+#### Cat Facts
+
+I've created one example service which hits a fun little [Cat Facts API](https://cat-fact.herokuapp.com/) and returns the first cat fact that it finds.
