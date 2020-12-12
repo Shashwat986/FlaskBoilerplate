@@ -4,11 +4,19 @@ This repository contains a set of examples for multiple functions required in a 
 
 ## Overall Structure
 
-- `app/config.py`: This is the configuration file used by Flask
-- `app/controllers`: This is where we have all the controllers
-- `app/helpers`: This folder contains all the helpers. Helpers will contain code that perform specific functions, that is modularized so that our controllers remain skinny
-- `app/models`: This folder contains all our models.
-- `app/workers`
+- `app`
+  - `__init__.py`: This file initializes the Flask instance, and creates all instances that need to be accessible elsewhere: `db`, `redis_client`, and `rq`. This also registers blueprints generated in `controllers/__init__.py`.
+  - `config.py`: This is the configuration file used while initialising Flask.
+  - `controllers`:
+    - `__init__.py`: This file creates the Blueprint that is fetched from `app/__init__.py` to be registered.
+    - ...: This is where we have all the controllers
+  - `helpers`
+    - ...: This is where we have our helpers. Helpers will contain code that perform specific functions, that is modularized so that our controllers remain skinny.
+  - `models`
+    - `__init__.py`: This init file defines `SQLBase`, which is our base class for all SQLAlchemy models.
+    - ...: This folder contains all our models.
+  - `workers`
+    - ...: This folder contains all our workers
 - `pytest.ini`: This is the configuration file used by `pytest`
 - `redis.conf`: This is the configuration file used by `redis-server`
 - `requirements.txt`: All the modules required by this repository
