@@ -77,6 +77,8 @@ There are multiple ways to perform API versioning. My personal preference is to 
 
 In this repository, I have gone for a different way of doing API versioning, where I pass the version code to each route via a route variable, and leave the business logic of API versioning at an individual controller level. This is potentially cleaner from the point of view of code-reuse, and definitely cleaner if each API is separately versioned, but if the entire API platform is versioned every time, this approach may be suboptimal.
 
+An example of this API versioning example may be seen in the `app/controllers/foo.py` which uses the version. The routing logic is available in `app/controllers/__init__.py`.
+
 ### Other Examples
 
 TBC
