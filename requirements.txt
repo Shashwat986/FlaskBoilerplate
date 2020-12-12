@@ -10,3 +10,4 @@ blinker
 sqlalchemy_mixins
 Flask-RQ2
 rq-dashboard
+supervisor
